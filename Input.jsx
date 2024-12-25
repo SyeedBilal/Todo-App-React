@@ -44,6 +44,20 @@ export default Input; */
 // *************--------   USING USE REDUCER HOOK FOR BETTER OPTIMIZATION ------------******
 
 function Input() {
+  const initialState = { todoInput: '', dateInput: '' };
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "SET_TODO":
+      return { ...state, todoInput: action.payload };
+    case "SET_DATE":
+      return { ...state, dateInput: action.payload };
+    case "RESET":
+      return initialState;
+    default:
+      return state;
+  }
+};
+
   const [state, dispatch] = useReducer(reducer, initialState); // Initialize the reducer
   const { addTodoItem } = useContext(TodoItemsContext); // Consume the context
 
